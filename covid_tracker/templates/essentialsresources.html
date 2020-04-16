@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block count %}
+    <div class="container mt-3">
+        <h6 class="font-italic">Find the Essentials and Resources State Wise .</h6>
+        {% for case in all_cases %}
+        
+            <div class="row shadow-lg p-3 mb-5 bg-white rounded mt-3">
+                <div class="col-md-3">
+                    <h4>{{case.state}}</h4>
+                    <p class="font-italic">{{case.city}}</p>
+                </div>
+                <div class="col-md-9">
+                    <h4>{{case.nameoftheorganisation}}</h4>
+                    <p>{{case.descriptionandorserviceprovided}}</p>
+                    <p></p>
+                    <a target="_blank"target="_blank" href={{case.contact}}>{{case.contact}}</a><br>
+                    <a target="_blank">({{case.phonenumber}})</a>
+                    
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+{% endblock %}

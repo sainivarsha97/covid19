@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block count %}
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-3 p-2">
+                        <p class="text-danger ">Confirmed</p>
+                        <h4 class="text-danger">{{total_state.confirmed}}</h4>
+                    </div>
+                    <div class="col-md-3 p-2">
+                        <p class="text-primary ">Active</p>
+                        <h4 class="text-primary">{{total_state.active}}</h4>
+                    </div>
+                    <div class="col-md-3 p-2">
+                        <p class="text-success">Recovered</p>
+                        <h4 class="text-success">{{total_state.recovered}}</h4>
+                    </div>
+                    <div class="col-md-3 p-2">
+                        <p class="text-secondary">Dead</p>
+                        <h4 class="text-secondary">{{total_state.deaths}}</h4>
+                        
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6"></div>
+        </div>
+        <hr>
+        <div class="container shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="row">
+                <div class="col-md-6">
+                    
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <table class="table-sm table-hover table-striped">
+                            <thead class="thead-light">
+                                <tr >
+                                    <th>State</th>
+                                    <th>Confirmed</th>
+                                    <th>Active</th>
+                                    <th>Dead</th>
+                                    <th>Recovered</th>
+                                </tr>
+                            </thead>
+                            {% for state in statewise %}
+                            <tr>
+                                <td><button class="btn btn-outline-info border-left" type="submit" name="state" value="{{state.state}}">{{state.state}}</button></td>
+                                <td name="confirmed" value="{{state.confirmed}}">{{state.confirmed}}</td>
+                                <td name="active" value="{{state.active}}">{{state.active}}</td>
+                                <td name="deaths" value="{{state.deaths}}">{{state.deaths}}</td>
+                                <td name="recovered" value="{{state.recovered}}">{{state.recovered}}</td>
+                            </tr>
+                            {%endfor%}
+                        </table>
+                    </form>
+                </div>
+                <div class="col-md-2 "> </div>
+
+                <div class="col-md-4 ">   
+                    
+                    {% if not citywise %}
+                        <table class="table " style="width: 100%;">
+                            <tr>
+                                <th class="text-muted">Total</th>
+                                <th class="text-danger">{{total_state.confirmed}}</th>
+                            </tr>
+                        </table>
+                        <p class="font-italic"> Click the State Name For More Info</p>
+                    {%endif%} 
+                    {% if citywise %}  
+                        <table class="table " style="width: 100%;">
+                            <tr>
+                                <th class="text-muted">{{State}}</th>
+                                <th class="text-danger">{{total_city}}</th>
+                            </tr>
+                        </table>      
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Location</th>
+                                <th>Cases</th>
+                                
+                            </tr>
+                            {% for city in citywise %}
+                            <tr>
+                                <td>{{city.city}}</td>
+                                <td>{{city.confirmed}}</td>
+                                
+                            </tr>
+                            {%endfor%}
+                        </table>  
+                    {% endif %}              
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

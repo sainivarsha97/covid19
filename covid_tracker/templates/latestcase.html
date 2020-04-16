@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block count %}
+    <div class="container mt-3">
+        {% for case in all_cases %}
+            {% if case.patientnumber and case.detectedstate %}
+                <div class="row shadow-lg p-3 mb-5 bg-white rounded mt-3">
+                    <div class="col-md-3">
+                        <h4>{{case.detectedstate}}</h4>
+                        <p>{{case.detectedcity}}</p>
+                        <p class="font-italic">{{case.detecteddistrict}}</p>
+                        <p>{{case.dateannounced}}</p>
+                    </div>
+                    <div class="col-md-9">                        
+                        <p> Patient No . {{case.patientnumber}}</p>                        
+                        <h4>{{case.notes}}</h4>
+                        {% if case.currentstatus %}
+                            <p>({{case.currentstatus}})</p>
+                        {% endif %}
+                        <a target="_blank" href={{case.source1}}>{{case.source1}}</a><br>
+                        <a target="_blank" href={{case.source2}}>{{case.source2}}</a><br>
+                        <a target="_blank" href={{case.source3}}>{{case.source3}}</a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    
+{% endblock %}

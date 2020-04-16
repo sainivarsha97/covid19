@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block count %}
+    <div class="container mt-3">
+        {% for case in all_cases %}
+            {% if case.state %}
+                <div class="row shadow-lg p-3 mb-5 bg-white rounded mt-3">
+                    <div class="col-md-3">
+                        <h3>{{case.patientstatus}}</h3>
+                        <h6>{{case.state}}</h6>
+                        <p class="font-italic">{{case.city}}</p>
+                        <p>{{case.date}}</p>
+                    </div>
+                    <div class="col-md-9">
+                        {% if case.agebracket %}
+                            <p> Age : {{case.agebracket}}</p>
+                        {% endif %}
+                        {% if case.gender %}
+                            <p>Gender : {{case.gender}}</p>
+                        {% endif %}
+                        <p>{{case.notes}}</p>
+                        <a target="_blank" href={{case.source1}}>{{case.source1}}</a><br>
+                        <a target="_blank" href={{case.source2}}>{{case.source2}}</a><br>
+                        <a target="_blank" href={{case.source3}}>{{case.source3}}</a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    
+{% endblock %}
